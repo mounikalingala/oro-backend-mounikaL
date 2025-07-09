@@ -48,7 +48,7 @@ router.get('/:code', async (req, res) => {
         if (url) {
             url.clicks += 1;
             await url.save();
-            return res.redirect(url.originalUrl);
+            return res.status(200).json({ redirectTo: url.originalUrl });
         } else {
             return res.status(404).json({ error: 'Short URL not found' });
         }
@@ -58,5 +58,6 @@ router.get('/:code', async (req, res) => {
         res.status(500).json('Server error');
     }
 });
+
 
 module.exports = router;
